@@ -36,19 +36,19 @@ IRCrypt Protocol Definition
 The protocol definition for IRCrypt is divided into two separate parts:
 
 1. Protocol definition for encrypted communication over IRC
-    a. Usage of symmetric ciphers (i.e. AES or TWOFISH) for both private
+    1. Usage of symmetric ciphers (i.e. AES or TWOFISH) for both private
        conversations and public channels.
-    b. Usage of asymmetric ciphers (i.e. RSA) in private conversations
+    2. Usage of asymmetric ciphers (i.e. RSA) in private conversations
 2. Key exchange using asymmetric ciphers (public key cryptography) and
    automatic key exchange based on a web-of-trust
-    a. Manual key exchange for symmetric ciphers
-    b. Automatic key exchange based on a web-of-trust
+    1. Manual key exchange for symmetric ciphers
+    2. Automatic key exchange based on a web-of-trust
 
 
 References
 ----------
 
 
-[rfc1459] http://tools.ietf.org/html/rfc1459
-[rfc4880] http://tools.ietf.org/html/rfc4880
-[gnupg]   http://www.gnupg.de
+ - [rfc1459] http://tools.ietf.org/html/rfc1459
+ - [rfc4880] http://tools.ietf.org/html/rfc4880
+ - [gnupg]   http://www.gnupg.de
