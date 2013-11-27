@@ -12,7 +12,7 @@ be modified.
 
 The <text> part of an encyrpted message has the form:
 
-   >CRY-<PART-ID> <CRYPT-MSG>
+    >CRY-<PART-ID> <CRYPT-MSG>
 
 
 ### <PART-ID>
@@ -57,7 +57,7 @@ suggested to use modern and secure ciphers like AES256 or TWOFISH.
 Using GPG and the Unix base64 tool such a message can be generated using the
 following command:
 
-   echo 'Message' | gpg --symmetric --cipher-algo TWOFISH | base64 -w 0
+    echo 'Message' | gpg --symmetric --cipher-algo TWOFISH | base64 -w 0
 
 
 ### TIMEOUT
@@ -82,10 +82,10 @@ encrypted using the TWOFISH cipher with 256bits key size and “secret” as
 passphrase. The decrypted contents of this message is “Hello are you receiving
 this message ?”:
 
-   :Angel PRIVMSG Wiz :>CRY-0 jA0ECgMCpf88FdB5AdFg0lwB03DpHgpQAqoGSR2QTIynudCXM178TN2Y06ahv+I1i/mLwDMt+s021cb14YdVWJXUVqBKTbpQ3B3aIthsxsb0qrQoUTdZTKHjGYXeYPCFoRaetkOiEPUcAWK9RA==
+    :Angel PRIVMSG Wiz :>CRY-0 jA0ECgMCpf88FdB5AdFg0lwB03DpHgpQAqoGSR2QTIynudCXM178TN2Y06ahv+I1i/mLwDMt+s021cb14YdVWJXUVqBKTbpQ3B3aIthsxsb0qrQoUTdZTKHjGYXeYPCFoRaetkOiEPUcAWK9RA==
 
 Assuming that this message would be to long, the following two IRC messages
 should produce the same output in Wizs IRC client:
 
-   :Angel PRIVMSG Wiz :>CRY-1 jA0ECgMCpf88FdB5AdFg0lwB03DpHgpQAqoGSR2QTIynudCXM178TN2Y06ahv+I1i/mLwDMt+s02
-   :Angel PRIVMSG Wiz :>CRY-0 1cb14YdVWJXUVqBKTbpQ3B3aIthsxsb0qrQoUTdZTKHjGYXeYPCFoRaetkOiEPUcAWK9RA==
+    :Angel PRIVMSG Wiz :>CRY-1 jA0ECgMCpf88FdB5AdFg0lwB03DpHgpQAqoGSR2QTIynudCXM178TN2Y06ahv+I1i/mLwDMt+s02
+    :Angel PRIVMSG Wiz :>CRY-0 1cb14YdVWJXUVqBKTbpQ3B3aIthsxsb0qrQoUTdZTKHjGYXeYPCFoRaetkOiEPUcAWK9RA==
