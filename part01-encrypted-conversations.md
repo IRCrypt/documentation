@@ -3,21 +3,21 @@ Part 1: Sending and receiving encrypted messages
 
 IRCrypt only affects private messages and notices as defined by section 4.4 of
 [rfc1459]. All other messages shall be passed unchanged by plug-ins
-implementing IRCrypt.  Furthermore, only the <text> part of these messages may
+implementing IRCrypt.  Furthermore, only the `<text>` part of these messages may
 be modified. 
 
 
 1.1 Symmetric Ciphers
 ---------------------
 
-The <text> part of an encyrpted message has the form:
+The `<text>` part of an encyrpted message has the form:
 
     >CRY-<PART-ID> <CRYPT-MSG>
 
 
-### <PART-ID>
+### `<PART-ID>`
 
-<PART-ID> specifies the identifier of the message part. This is intended for
+`<PART-ID>` specifies the identifier of the message part. This is intended for
 multipart messages and is a continuous descending integer value with a value of
 “0” indicating the last part of a message.
 
@@ -30,8 +30,8 @@ via IRC after encryption, as one message may not exceed 512 characters
 (including IRC protocol command identifier, trailing \CR\LF, etc.) as specified
 in [rfc1459, sec.2.3]. In such a case it is necessary to split the encrypted
 messages in multiple parts, sending them as separate messages. Given that the
-message has to be split in N parts the <PART-ID> of the first part to send is
-N, the second is N-1, … until the last part is send with <PART-ID> set to 0.
+message has to be split in N parts the `<PART-ID>` of the first part to send is
+N, the second is N-1, … until the last part is send with `<PART-ID>` set to 0.
 
 The descending order of the part ID ensures that:
 
@@ -47,10 +47,10 @@ The descending order of the part ID ensures that:
    decoding the current message only.
 
 
-### <CRYPT-MSG>
+### `<CRYPT-MSG>`
 
-<CRYPT-MSG> is a message encrypted according to the OpenPGP standard, Base64
-encoded and cut into multiple parts (see <PART-ID>) if necessary. The used
+`<CRYPT-MSG>` is a message encrypted according to the OpenPGP standard, Base64
+encoded and cut into multiple parts (see `<PART-ID>`) if necessary. The used
 cipher may be everything allowed by OpenPGP, nevertheless, it is strongly
 suggested to use modern and secure ciphers like AES256 or TWOFISH.
 
@@ -62,13 +62,13 @@ following command:
 
 ### TIMEOUT
 
-As using <PART-ID> greater than 0 should make a client keep these message parts
-in memory while waiting for subsequent parts, this could be used as a possible
-attack on clients: Sending such messages would cause a client to constantly
-allocate new memory. However, subsequent message parts should be send one after
-another over a short period of time. Thus is is not only valid but recommended
-to discard old message parts after some time, if no subsequent parts are being
-received.
+As using `<PART-ID>` greater than 0 should make a client keep these message
+parts in memory while waiting for subsequent parts, this could be used as a
+possible attack on clients: Sending such messages would cause a client to
+constantly allocate new memory. However, subsequent message parts should be
+send one after another over a short period of time. Thus is is not only valid
+but recommended to discard old message parts after some time, if no subsequent
+parts are being received.
 
 Given the nature of IRC as “instant” chat protocol, consecutive messages should
 not be delayed very long and it should be reasonable to assume a message to
