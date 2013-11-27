@@ -12,7 +12,7 @@ be modified.
 
 The <text> part of an encyrpted message has the form:
 
-	>CRY-<PART-ID> <CRYPT-MSG>
+   >CRY-<PART-ID> <CRYPT-MSG>
 
 
 ### <PART-ID>
@@ -36,15 +36,15 @@ N, the second is N-1, … until the last part is send with <PART-ID> set to 0.
 The descending order of the part ID ensures that:
 
  - The client knows how many parts will be send, making it possible to
-	effectively allocate memory or, if the number of parts is to high for the
-	client to handle, to refuse the messages.
+   effectively allocate memory or, if the number of parts is to high for the
+   client to handle, to refuse the messages.
 
  - The client can indicate and may throw away “old” message parts which were
-	never completely transmitted, i.e. due to a failing connection. If, for
-	example, a client receives messages preceded by “>CRY-2” and “>CRY-1” but
-	the next message is again preceded by “>CRY-1”, the client knows that
-	something is not right, may throw away the old message parts and try
-	decoding the current message only.
+   never completely transmitted, i.e. due to a failing connection. If, for
+   example, a client receives messages preceded by “>CRY-2” and “>CRY-1” but
+   the next message is again preceded by “>CRY-1”, the client knows that
+   something is not right, may throw away the old message parts and try
+   decoding the current message only.
 
 
 ### <CRYPT-MSG>
@@ -57,7 +57,7 @@ suggested to use modern and secure ciphers like AES256 or TWOFISH.
 Using GPG and the Unix base64 tool such a message can be generated using the
 following command:
 
-	echo 'Unencrypted Message' | gpg --symmetric --cipher-algo TWOFISH | base64 -w 0
+   echo 'Message' | gpg --symmetric --cipher-algo TWOFISH | base64 -w 0
 
 
 ### TIMEOUT
@@ -82,9 +82,10 @@ encrypted using the TWOFISH cipher with 256bits key size and “secret” as
 passphrase. The decrypted contents of this message is “Hello are you receiving
 this message ?”:
 
-	:Angel PRIVMSG Wiz :>CRY-0 jA0ECgMCpf88FdB5AdFg0lwB03DpHgpQAqoGSR2QTIynudCXM178TN2Y06ahv+I1i/mLwDMt+s021cb14YdVWJXUVqBKTbpQ3B3aIthsxsb0qrQoUTdZTKHjGYXeYPCFoRaetkOiEPUcAWK9RA==
+   :Angel PRIVMSG Wiz :>CRY-0 jA0ECgMCpf88FdB5AdFg0lwB03DpHgpQAqoGSR2QTIynudCXM178TN2Y06ahv+I1i/mLwDMt+s021cb14YdVWJXUVqBKTbpQ3B3aIthsxsb0qrQoUTdZTKHjGYXeYPCFoRaetkOiEPUcAWK9RA==
 
-Assuming that this message would be to long, the following two IRC messages should produce the same output in Wizs IRC client:
+Assuming that this message would be to long, the following two IRC messages
+should produce the same output in Wizs IRC client:
 
-	:Angel PRIVMSG Wiz :>CRY-1 jA0ECgMCpf88FdB5AdFg0lwB03DpHgpQAqoGSR2QTIynudCXM178TN2Y06ahv+I1i/mLwDMt+s02
-	:Angel PRIVMSG Wiz :>CRY-0 1cb14YdVWJXUVqBKTbpQ3B3aIthsxsb0qrQoUTdZTKHjGYXeYPCFoRaetkOiEPUcAWK9RA==
+   :Angel PRIVMSG Wiz :>CRY-1 jA0ECgMCpf88FdB5AdFg0lwB03DpHgpQAqoGSR2QTIynudCXM178TN2Y06ahv+I1i/mLwDMt+s02
+   :Angel PRIVMSG Wiz :>CRY-0 1cb14YdVWJXUVqBKTbpQ3B3aIthsxsb0qrQoUTdZTKHjGYXeYPCFoRaetkOiEPUcAWK9RA==
