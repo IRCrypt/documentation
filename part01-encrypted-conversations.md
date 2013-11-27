@@ -7,8 +7,8 @@ implementing IRCrypt.  Furthermore, only the <text> part of these messages may
 be modified. 
 
 
-a. Symmetric Ciphers
---------------------
+1.1 Symmetric Ciphers
+---------------------
 
 The <text> part of an encyrpted message has the form:
 
