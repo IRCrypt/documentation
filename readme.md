@@ -41,8 +41,6 @@ The protocol definition for IRCrypt is divided into two separate parts:
     2. Usage of asymmetric ciphers (i.e. RSA) in private conversations
 2. Key exchange using asymmetric ciphers (public key cryptography) and
    automatic key exchange based on a web-of-trust
-    1. Manual key exchange for symmetric ciphers
-    2. Automatic key exchange based on a web-of-trust
 
 
 References
