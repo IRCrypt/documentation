@@ -39,13 +39,17 @@ The protocol definition for IRCrypt is divided into two separate parts:
     1. Usage of symmetric ciphers (i.e. AES or TWOFISH) for both private
        conversations and public channels.
     2. Usage of asymmetric ciphers (i.e. RSA) in private conversations
-2. Key exchange using asymmetric ciphers (public key cryptography) and
-   automatic key exchange based on a web-of-trust
+2. Protocol definition for key exchange using asymmetric ciphers (public key
+   cryptography)
+
+Part 1.ii and part 2 are optional parts, so that the protocol is satisfied if
+only part 1.i is implemented, but there has to be a correct error treatment for
+incomming messages encrypted with an asymmetric cipher and/or for key exchange 
+requests if they are not implemented.
 
 
 References
 ----------
-
 
  - [rfc1459] http://tools.ietf.org/html/rfc1459
  - [rfc4880] http://tools.ietf.org/html/rfc4880
