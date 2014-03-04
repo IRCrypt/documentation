@@ -7,7 +7,7 @@ implementing IRCrypt. Furthermore, only the `<text>` part of these messages may
 be modified.
 
 
-### `IRCrypt message form`
+### IRCrypt Message Template
 
 An IRCrypt message has the following form.
 
@@ -17,6 +17,9 @@ Notice that the `<text>` part of a message has not to start with the IRCrypt
 message, so that IRCrypt can also handle e.g. timestamps in front of an IRCrypt
 message.
 
+### `<PREFIX>`
+
+
 
 ### `<PART-ID>`
 
@@ -25,7 +28,7 @@ multipart messages and is a continuous descending integer value with a value of
 0 indicating the last part of a message.
 
 This means that for short messages, you can simply ignore this identifier and
-just start the message with °»<PREFIX>-0°… which tells your communication
+just start the message with `<PREFIX>` which tells your communication
 partner that he can directly decrypt and display the message.
 
 It may however be, that an already long message grows to large to send at once
@@ -34,7 +37,7 @@ via IRC after encryption, as one message may not exceed 512 characters
 in [rfc1459, sec.2.3]. In such a case it is necessary to split the encrypted
 messages in multiple parts, sending them as separate IRCrypt messages (see
 `IRCrypt message form`). Given that the message has to be split in N parts the
-`<PART-ID>` of the first part to send is N, the second is N-1, °ƒ until the
+`<PART-ID>` of the first part to send is N, the second is N-1, ‚Ä¶ until the
 last part is send with `<PART-ID>` set to 0.
 
 The descending order of the part ID ensures that:
@@ -43,12 +46,12 @@ The descending order of the part ID ensures that:
 	effectively allocate memory or, if the number of parts is to high for the
 	client to handle, to refuse the messages.
 
- - The client can indicate and may throw away °»old°… message parts which
-	were never completely transmitted, i.e. due to a failing connection. If, for
-	example, a client receives messages preceded by °»<PREFIX>-2°… and
-	°»<PREFIX>-1°… but the next message is again preceded by
-	°»<PREFIX>-1°…, the client knows that something is not right, may throw
-	away the old message parts and try decoding the current message only.
+ - The client can indicate and may throw away ‚Äúold‚Äù message parts which were
+	never completely transmitted, i.e. due to a failing connection. If, for
+	example, a client receives messages preceded by ‚Äú<PREFIX>‚Äù and ‚Äú<PREFIX>‚Äù
+	but the next message is again preceded by ‚Äú<PREFIX>‚Äù, the client knows that
+	something is not right, may throw away the old message parts and try
+	decoding the current message only.
 
 
 ### `<CRYPT-MSG>`
@@ -68,7 +71,7 @@ send one after another over a short period of time. Thus is is not only valid
 but recommended to discard old message parts after some time, if no subsequent
 parts are being received.
 
-Given the nature of IRC as °»instant°… chat protocol, consecutive messages
+Given the nature of IRC as ¬°√àinstant¬°√â chat protocol, consecutive messages
 should not be delayed very long and it should be reasonable to assume a message
 to time out after five minutes.
 
@@ -109,9 +112,9 @@ has to be sent back the notice.
 ### Example message
 
 The following line contains a valid IRC Message from Angel to Wiz. It is
-encrypted using the TWOFISH cipher with 256bits key size and °»secret°… as
-passphrase. The decrypted contents of this message is °»Hello are you
-receiving this message ?°…:
+encrypted using the TWOFISH cipher with 256bits key size and ¬°√àsecret¬°√â as
+passphrase. The decrypted contents of this message is ¬°√àHello are you
+receiving this message ?¬°√â:
 
     :Angel PRIVMSG Wiz :>CRY-0 jA0ECgMCpf88FdB5AdFg0lwB03DpHgpQAqoGSR2QTIynudCXM178TN2Y06ahv+I1i/mLwDMt+s021cb14YdVWJXUVqBKTbpQ3B3aIthsxsb0qrQoUTdZTKHjGYXeYPCFoRaetkOiEPUcAWK9RA==
 
