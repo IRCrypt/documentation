@@ -1,7 +1,7 @@
 IRCrypt – Encryption Layer for IRC
 ==================================
 
-*IMPORTANT: This is a working dranft and not intended for usage yet!*
+*IMPORTANT: This is a working draft and not intended for usage yet!*
 
 IRCrypt is intended to define an encryption layer for the IRC protocol defined
 in [rfc1459]. The projects primary goals are:
@@ -33,19 +33,28 @@ client.
 IRCrypt Protocol Definition
 ---------------------------
 
-The protocol definition for IRCrypt is divided into two separate parts:
+To help IRCrypt grow a little bit faster, there exists a **lite version** and a
+**full version** of IRCrypt. So some parts of the protocol are divided into the
+definition of the lite version and the full version. The structure of the
+protocol is as following:
 
-1. Protocol definition for encrypted communication over IRC
-    1. Usage of symmetric ciphers (i.e. AES or TWOFISH) for both private
-       conversations and public channels.
-    2. Usage of asymmetric ciphers (i.e. RSA) in private conversations
-2. Protocol definition for key exchange using asymmetric ciphers (public key
-   cryptography)
+1. **General protocol information**
+2. **Symmetric Cipher**
+3. **Asymmetric Cipher**
+	1. Lite Version
+	2. Full Version
+4. **Key Exchange**
+	1. Lite Version
+	2. Full Version
 
-Part 1.ii and part 2 are optional parts, so that the protocol is satisfied if
-only part 1.i is implemented, but there has to be a correct error treatment for
-incomming messages encrypted with an asymmetric cipher and/or for key exchange 
-requests if they are not implemented.
+Obviously **General protocol information** is important for every IRCRypt
+implementation.  The main part of IRCrypt is to communicate encrypted in
+channels with probably more than one other person. Because of that the part
+**Symmetric Cipher** has to be part both in the lite version as well as in the
+full version. In the lite version **Asymmetric Cipher** and **Key Exchange**
+are not implemented, but there has to be a correct error treatment for incoming
+messages encrypted with an asymmetric cipher and/or for key exchange requests,
+so this error treatment is described in 3.1 and 4.1.
 
 
 References

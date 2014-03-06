@@ -19,35 +19,31 @@ message.
 
 ### `<PREFIX>`
 
-**Every** IRCrypt message starts with a prefix. If a message is too long and have
-to be cut in separate parts (see `<PART-ID>`), every part starts with the
-prefix.
+**Every** IRCrypt message starts with a `<prefix>`. If a message is too long
+and has to be cut in separate parts (see `<PART-ID>`), every part starts with
+`<prefix>`.
 
-Based on the prefix IRCrypt knows how to handle the message, so different
+Based on this `<prefix>` IRCrypt knows how to handle the message, so different
 IRCrypt functions like symmetric encryption or key exchange have different
 prefixes. The prefix for errors is `UCRY`. All other prefixes are described
 below in their own chapter.
 
 ### `<PART-ID>`
 
-`<PART-ID>` specifies the identifier of the message part. This is intended for
-multipart messages and is a continuous descending integer value with a value of
+`<PART-ID>` identifies the part of the message. This is intended for multipart
+messages and is a continuous descending integer value with a value of
 0 indicating the last part of a message.
 
-This means that for short messages, you can simply ignore this identifier and
-just start the message with `<PREFIX>` which tells your communication
-partner that he can directly decrypt and display the message.
-
-It may however be, that an already long message grows to large to send at once
-via IRC after encryption, as one message may not exceed 512 characters
+It is possible, that an already long message grows even to large to be sent at
+once via IRC after encryption, as one message may not exceed 512 characters
 (including IRC protocol command identifier, trailing \CR\LF, etc.) as specified
-in [rfc1459, 2.3]. In such a case it is necessary to split the encrypted
-messages in multiple parts, sending them as separate IRCrypt messages (see
-`IRCrypt message form`). Given that the message has to be split in N parts the
-`<PART-ID>` of the first part to send is N, the second is N-1, … until the
-last part is send with `<PART-ID>` set to 0.
+in [rfc1459, 2.3]. In such case it is necessary to split the encrypted messages
+in multiple parts, sending them as separate IRCrypt messages (see `IRCrypt
+Message Template`). Given that the message has to be split in N parts the
+`<PART-ID>` of the first part to send is N, the second is N-1, … until the last
+part, is sent with `<PART-ID>` set to 0.
 
-The descending order of the part ID ensures that:
+The descending order of the `<PART-ID>` ensures that:
 
  - The client knows how many parts will be send, making it possible to
 	effectively allocate memory or, if the number of parts is to high for the
@@ -55,10 +51,9 @@ The descending order of the part ID ensures that:
 
  - The client can indicate and may throw away “old” message parts which were
 	never completely transmitted, i.e. due to a failing connection. If, for
-	example, a client receives messages preceded by “<PREFIX>-2” and “<PREFIX>-1”
-	but the next message is again preceded by “<PREFIX>-2”, the client knows that
-	something is not right, may throw away the old message parts and try
-	decoding the current message only.
+	example, a client receives messages preceded by “`<PREFIX>`-2” and “`<PREFIX>`-1”
+	but the next message is again preceded by “`<PREFIX>`-2”, the client may
+	throw away the old message parts and try decoding the current message only.
 
 
 ### `<CRYPT-MSG>`
@@ -70,17 +65,17 @@ necessary.
 
 ### TIMEOUT
 
-As using `<PART-ID>` greater than 0 should make a client keep these message
-parts in memory while waiting for subsequent parts, this could be used as a
-possible attack on clients: Sending such messages would cause a client to
+As using `<PART-ID>` values greater than 0 should make a client keep these
+message parts in memory while waiting for subsequent parts, this could be used
+as a possible attack on clients: Sending such parts would cause a client to
 constantly allocate new memory. However, subsequent message parts should be
 send one after another over a short period of time. Thus is is not only valid
 but recommended to discard old message parts after some time, if no subsequent
 parts are being received.
 
-Given the nature of IRC as `instant` chat protocol, consecutive messages
-should not be delayed very long and it should be reasonable to assume a message
-to time out after five minutes.
+Given the nature of IRC as an `instant` chat protocol, consecutive messages
+should not be delayed over a long time and it should be reasonable to assume a
+message to time out after five minutes.
 
 
 Part 2: Symmetric Cipher
@@ -95,9 +90,9 @@ The prefix of a symmetric encrypted messages is `>CRY`.
 
 The used cipher may be everything allowed by OpenPGP, nevertheless, it is
 strongly suggested to use modern and secure ciphers like AES256 or TWOFISH. It
-would be also nice, if the user can choose the used cipher by himself.
+would be also nice, if the user can choose the used cipher himself.
 
-Using GPG and the Unix base64 tool e.g. such a message can be generated by using the
+Using GPG and the Unix base64 tool such a message e.g. can be generated by using the
 following command
 
     echo 'Message' | gpg --symmetric --cipher-algo TWOFISH | base64 -w 0
@@ -108,10 +103,10 @@ and decrypted by using
 
 ### Errors
 
-Not every Implementation of the OpenPGP standard has implemented the same
-symmetric ciphers and the list of ciphers that has to be included to fulfill the
-OpenPGP standard is very limited (see [rfc4880 8.2]). If an symmetric encrypted
-IRCrypt message with an unknown cipher is received, the error
+Not every implementation of the OpenPGP standard includes the same symmetric
+ciphers and the list of ciphers that has to be working to fulfill the OpenPGP
+standard is very limited (see [rfc4880 8.2]). If an symmetric encrypted IRCrypt
+message with an unknown cipher is received, the error
 
 	>UCRY-CIPHER-NOT-FOUND
 
@@ -121,7 +116,7 @@ should to be sent back as a notice.
 
 The following line contains a valid IRC Message from Angel to Wiz. It is
 encrypted using the TWOFISH cipher with 256bits key size and “secret” as
-passphrase. The decrypted contents of this message is “Hello are you
+passphrase. The decrypted content of this message is “Hello are you
 receiving this message ?”:
 
     :Angel PRIVMSG Wiz :>CRY-0 jA0ECgMCpf88FdB5AdFg0lwB03DpHgpQAqoGSR2QTIynudCXM178TN2Y06ahv+I1i/mLwDMt+s021cb14YdVWJXUVqBKTbpQ3B3aIthsxsb0qrQoUTdZTKHjGYXeYPCFoRaetkOiEPUcAWK9RA==
@@ -136,6 +131,9 @@ should produce the same output in Wizs IRC client:
 Part 3: Asymmetric Cipher
 =========================
 
+Lite Version
+------------
+
 In the lite version encryption with asymmetric cipher shall not be implemented,
 but if an asymmetric encrypted message is received, IRCrypt has to send back
 the error
@@ -143,20 +141,23 @@ the error
 	>UCRY-NOASYM
 
 Most of the asymmetric encrypted messages are received in different parts (see
-`<PART-ID>`), but the error should only be sent once. **Not** one error per
+`<PART-ID>`), but the error should only be sent once and **not** one error per
 part. The prefix of an asymmetric encrypted messages is `>ACRY`.
 
 
 PART 4: Key Exchange
 ====================
 
-In the lite version key exchange shall not be implemented, but if an key
-exchange requests is received, IRCrypt has to send back the error
+Lite Version
+------------
+
+In the lite version a key exchange shall not be implemented, but if an key
+exchange request is received, IRCrypt has to send back the error
 
 	>UCRY-NOEXCHANGE
 
 Most of the asymmetric encrypted messages are received in different parts (see
-`<PART-ID>`), but the error should only be sent once. **Not** one error per
+`<PART-ID>`), but the error should only be sent once and **not** one error per
 part. Key exchanges are received by notices defined in [rfc1459 4.4.2]. The
 prefix of a key exchange request message is `>WCRY`.
 
