@@ -48,9 +48,9 @@ protocol is as following:
 	2. Full Version
 
 Obviously **General protocol information** is important for every IRCRypt
-implementation.  The main part of IRCrypt is to communicate encrypted in
+implementation. The main part of IRCrypt is to communicate encrypted in
 channels with probably more than one other person. Because of that the part
-**Symmetric Cipher** has to be part both in the lite version as well as in the
+**Symmetric Cipher** has to be part of both the lite version as well as the
 full version. In the lite version **Asymmetric Cipher** and **Key Exchange**
 are not implemented, but there has to be a correct error treatment for incoming
 messages encrypted with an asymmetric cipher and/or for key exchange requests,
