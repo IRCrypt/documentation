@@ -33,29 +33,19 @@ client.
 IRCrypt Protocol Definition
 ---------------------------
 
-To help IRCrypt grow a little bit faster, there exists a **lite version** and a
-**full version** of IRCrypt. So some parts of the protocol are divided into the
-definition of the lite version and the full version. The structure of the
-protocol is as following:
+To help IRCrypt grow a little bit faster, there exists a **basic version** of
+IRCrypt and some **optional extensions**. So some parts of the protocol are
+divided into the definition of the basic version and the **optional
+extensions**. The structure of the protocol is as following:
 
 1. **General protocol information**
 2. **Symmetric Cipher**
 3. **Asymmetric Cipher**
-	1. Lite Version
-	2. Full Version
+	1. Basic Version
+	2. Optional Extensions
 4. **Key Exchange**
-	1. Lite Version
-	2. Full Version
-
-Obviously **General protocol information** is important for every IRCRypt
-implementation. The main part of IRCrypt is to communicate encrypted in
-channels with probably more than one other person. Because of that the part
-**Symmetric Cipher** has to be part of both the lite version as well as the
-full version. In the lite version **Asymmetric Cipher** and **Key Exchange**
-are not implemented, but there has to be a correct error treatment for incoming
-messages encrypted with an asymmetric cipher and/or for key exchange requests,
-so this error treatment is described in 3.1 and 4.1.
-
+	1. Basic Version
+	2. Optional Extensions
 
 References
 ----------

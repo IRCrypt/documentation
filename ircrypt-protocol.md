@@ -131,8 +131,8 @@ should produce the same output in Wizs IRC client:
 Part 3: Asymmetric Cipher
 =========================
 
-Lite Version
-------------
+Basic Version
+-------------
 
 In the lite version encryption with asymmetric cipher shall not be implemented,
 but if an asymmetric encrypted message is received, IRCrypt has to send back
@@ -148,8 +148,8 @@ part. The prefix of an asymmetric encrypted messages is `>ACRY`.
 PART 4: Key Exchange
 ====================
 
-Lite Version
-------------
+Basic Version
+-------------
 
 In the lite version a key exchange shall not be implemented, but if an key
 exchange request is received, IRCrypt has to send back the error
