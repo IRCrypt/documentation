@@ -1,5 +1,6 @@
-Part 1: Description of the key exchange protocol
-================================================
+#Key exchange Protocol
+
+##Description
 
 The key exchange protocol can be divided in three phases.
 
@@ -58,3 +59,17 @@ symmetric key for communication with Bob and finishs phase 3.
 
 **Important Comment:** Some of the steps 1-4 can be simultaneous, but the 4.
 step is after step 1-5.
+
+## Content of the notices
+
+The diffenrent notices in the key exchange protocol have different prefixes shown in this table:
+
+| notice(s)                               | Content                               |
+| --------------------------------------- | ------------------------------------- |
+| Start key exchange                      | >KEY-EX-PING (fingerprint)            |
+| Continue key exchange (Bob)             | >KEY-EX-PONG (fingerprint)            |
+| Continue key exchange (Alice)           | >KEY-EX-NEXT-PHASE                    |
+| Send public key                         | >PUB-EX-(number) (public key part)    |
+| confirmation of receipt (public key)    | >KEY-EX-PUB-RECEIVED                  |
+| Send part of symmertric key             | >SYM-EX-(number) (symmetric key part) |
+| confirmation of receipt (symmetric key) | >KEY-EX-SYM-RECEIVED                  |
