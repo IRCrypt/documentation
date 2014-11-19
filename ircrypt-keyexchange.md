@@ -1,4 +1,4 @@
-#Key exchange Protocol
+#Key Exchange Protocol
 
 ##Description
 
@@ -73,3 +73,17 @@ The diffenrent notices in the key exchange protocol have different prefixes show
 | confirmation of receipt (public key)    | >KEY-EX-PUB-RECEIVED                  |
 | Send part of symmertric key             | >SYM-EX-(number) (symmetric key part) |
 | confirmation of receipt (symmetric key) | >KEY-EX-SYM-RECEIVED                  |
+
+## Errors
+
+The following errors can returned by the communication partner during the process of key exchanging:
+
+| Error                               | Meaning                                         |
+| ----------------------------------- | ----------------------------------------------- |
+| >UCRY-PING-WITH-INVALID-FINGERPRINT | The transmitted fingerprint does not match      |
+| >UCRY-NO-KEY-EXCHANGE               | No key exchange started                         |
+| >UCRY-NO-REQUEST-FOR-PUBLIC-KEY     | Get a public key without a request for it       |
+| >UCRY-INTERNAL-ERROR                | The communication partner has an internal error |
+| >UCRY-NO-REQUEST-FOR-SYMMETRIC-KEY  | Get a symmetric key without a request for it    |
+
+
