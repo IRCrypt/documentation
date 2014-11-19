@@ -21,6 +21,15 @@ The second phase of the key exchange protocol has the task to exchange the publi
 3. Alice receives a confirmation of receipt from Bob and knows that Bob has now her public key.
 4. If Alice knows that both communication partners has the public key of the other, she starts phase 3.
 
-**Important Comment:** This phase is symmetric. So we only descripe the protocol for one side. For Alice.
- - Some of the steps 1-3 can be simultaneous, but the 4. step is after step 1-3.
+**Important Comment:** Some of the steps 1-3 can be simultaneous, but the 4. step is after step 1-3.
 
+### Phase 3:
+The third phase of the key exchange protocol has the tast to exchange the parts of the symmetric key and calculate the whole symmetric key. This phase is symmetric. So in the following we only describe the protocol for Alice's side.
+
+1. Alice calculates her part of the symmetric key and sends it in multiple notices asymmetrically encrypted and signed to Bob.
+2. Alice receive Bob’s part of the symmetric key and stores it.
+3. Alice XOR both parts to generate the symmetic key and send a confirmation of receipt to Bob.
+4. Alice receives a confirmation of receipt from Bob and knows that Bob has the symmetric key.
+5. fter sending and receiving the confirmation of receipt, Alice set the new symmetric key for communication with Bob and finishs phase 3.
+
+**Important Comment:** Some of the steps 1-4 can be simultaneous, but the 4. step is after step 1-5.
